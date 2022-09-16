@@ -18,6 +18,7 @@ from django.urls import path
 from blogAPI.views import MobileView
 from productsapi.views import ProductView,ProductListView,ProductViewModelSerialView,ProductViewModelListView,ProductViewSetView,ProductModelViewSetView,UserRegistrationView
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken.views import obtain_auth_token
 
 router_obj = DefaultRouter()  # used of viewset
 router_obj.register("products/viewset",ProductViewSetView,basename="products") # don't put / at end
@@ -32,5 +33,6 @@ urlpatterns = [
     path('products/<int:id>',ProductListView.as_view()),
     path('products/model/', ProductViewModelSerialView.as_view()),
     path('products/model/<int:id>', ProductViewModelListView.as_view()),
+    path('accounts/token',obtain_auth_token),
 
 ]+router_obj.urls

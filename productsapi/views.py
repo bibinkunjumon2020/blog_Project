@@ -132,7 +132,8 @@ class ProductViewSetView(viewsets.ViewSet):
 # All the above mentioned methods are in built in modelviewset class
 class ProductModelViewSetView(viewsets.ModelViewSet):
     # checking authentication
-    authentication_classes = [authentication.BasicAuthentication]
+    #authentication_classes = [authentication.BasicAuthentication]
+    authentication_classes = [authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
     # using model serialiser
     serializer_class = ModelSerializer
