@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from blogAPI.views import MobileView
-from productsapi.views import ProductView,ProductListView,ProductViewModelSerialView,ProductViewModelListView,ProductViewSetView,ProductModelViewSetView
+from productsapi.views import ProductView,ProductListView,ProductViewModelSerialView,ProductViewModelListView,ProductViewSetView,ProductModelViewSetView,UserRegistrationView
 from rest_framework.routers import DefaultRouter
 
 router_obj = DefaultRouter()  # used of viewset
 router_obj.register("products/viewset",ProductViewSetView,basename="products") # don't put / at end
-router_obj.register("products/model",ProductModelViewSetView,basename="mod")
+router_obj.register("products/modelviewset",ProductModelViewSetView,basename="mod")
+router_obj.register("ecommerce/register",UserRegistrationView,basename="registration")
 #When setting url make it different - i got value error
 
 urlpatterns = [
@@ -31,4 +32,5 @@ urlpatterns = [
     path('products/<int:id>',ProductListView.as_view()),
     path('products/model/', ProductViewModelSerialView.as_view()),
     path('products/model/<int:id>', ProductViewModelListView.as_view()),
+
 ]+router_obj.urls

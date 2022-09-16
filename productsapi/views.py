@@ -2,9 +2,10 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework.response import Response
-from productsapi.serializer_my import MySerializer,ModelSerializer
+from productsapi.serializer_my import MySerializer,ModelSerializer,UserSerializer
 from productsapi.models import ProductItems
-from rest_framework import status
+from rest_framework import status,authentication,permissions
+from django.contrib.auth.models import User
 # Create your views here.
 
 ## We used NORMAL SERIALIZER IN THE FOLLOWING CODE
@@ -128,7 +129,16 @@ class ProductViewSetView(viewsets.ViewSet):
         object.delete()
         return Response({"msg":"Deleted"},status=status.HTTP_204_NO_CONTENT)
 
-
+# All the above mentioned methods are in built in modelviewset class
 class ProductModelViewSetView(viewsets.ModelViewSet):
-    serializer_class = ModelSerializer()
+    # checking authentication
+    authentication_classes = [authentication.BasicAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    # using model serialiser
+    serializer_class = ModelSerializer
     queryset = ProductItems.objects.all()
+
+
+class UserRegistrationView(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()

@@ -1,0 +1,9 @@
+
+##authentication.py
+class BasicAuthentication
+class SessionAuthentication
+class TokenAuthentication
+
+#permission.py
+class isAuthenticated
+class isAdminUser

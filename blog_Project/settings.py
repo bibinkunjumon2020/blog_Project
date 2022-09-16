@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'blogAPI',
     'productsapi',
+    'rest_framework.authtoken',#whenever our model schanged makemigrations needed otherwise migrate.so here migrate
 ]
 
 MIDDLEWARE = [

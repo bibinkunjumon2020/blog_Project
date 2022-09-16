@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from productsapi.models import ProductItems
+from django.contrib.auth.models import User # imported model
 class MySerializer(serializers.Serializer):
     id=serializers.IntegerField(read_only=True)
     title = serializers.CharField()
@@ -20,3 +21,17 @@ class ModelSerializer(serializers.ModelSerializer):
         model = ProductItems
         fields = "__all__"  # very careful about spellings
         # Or I can write fields=["id",name",..etc]
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "password"
+        ]
+    def create(self, validated_data):
+        return User.objects.create_user(**validated_data)
